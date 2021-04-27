@@ -61,6 +61,7 @@ function allConstructor(data){
 ///////////////////////////////////
 //My card route and it's function:
 //////////////////////////////////
+////Use id///
 //1-Save Data to Database
 app.post('/myCard',saveHandler);
 function saveHandler(req,res){
@@ -74,9 +75,31 @@ function saveHandler(req,res){
   });
 }
 //2-RenderData from Database
+app.get('/myCard',renderSaved);
+function renderSaved(req,res){
+  const SQL = 'SELECT * FROM make WHERE (image,product,price,description) VALUES ($!,$2,$3,$4)';
+  const safeValues = [image,product,price,description];
+  client.query(SQL,safeValues).then(data=>{
+    res.render('/pages/myCard',data);
+  });
+}
 
+///////////////////////////////////
+//details route and it's function:
+//////////////////////////////////
+app.get('/details',detailsHandler);
+function detailsHandler(req,res){
 
+}
+///////////////////////////////////
+//update route and it's function:
+//////////////////////////////////
+//app.put('/details/:id',updateHandler);
 
+///////////////////////////////////
+//delete route and it's function:
+//////////////////////////////////
+//app.delete('/details/:id', deleteHandler);
 
 //listener:
 client.listen(`listening on port ${PORT}`);

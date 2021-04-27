@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/product by price">All products</a>
+            <a href="/myCard">My Card</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <% data.forEach(element=>{%>
+                <div class="result">
+                    <img src="<%=element.image_link%>" alt="">
+                    <h3>
+                        <%=element.product%>
+                    </h3>
+                    <h3>
+                        <%=element.price%>
+                    </h3>
+                    <h4>
+                        <%=element.description%>
+                    </h4>
+                    <form action="/myCard" method="POST">
+                        <input type="hidden" name="product" value="<%=element.product%>">
+                        <input type="hidden" name="image" value="<%=element.image_link%>">
+                        <input type="hidden" name="price" value="<%=element.price%>">
+                        <input type="hidden" name="description" value="<%=element.description%>">
+                        <button type="submit">add-to-card</button>
+                    </form>
+                 </div>
+                <% })%>
+
+        </div>
+    </main>
+</body>
+
+</html>
